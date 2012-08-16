@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require "cinch"
+
+require_relative "../lib/space_explorer"
+
+bot = Cinch::Bot.new
+
+bot.configure do |c|
+  c.server = "irc.freenode.org"
+  c.channels = ["#{ENV['ROVER_CHANNEL']} #{ENV['ROVER_PASSWORD']}"]
+  c.nick     = "roboseacreature"
+end
+
+rover            = SpaceExplorer::Rover.new
+ground_control   = SpaceExplorer::MissionControl.new(
+                    Cinch::Channel.new(ENV["ROVER_CHANNEL"], bot))
+
+rover.radio_link           = SpaceExplorer::Radio.new(ground_control)
+ground_control.radio_link  = SpaceExplorer::Radio.new(rover)
+
+rover.listen
+
+bot.on(:message, /(.*)/) do |m, command|
+ ground_control.send_command(command)
+end
+
+bot.start
