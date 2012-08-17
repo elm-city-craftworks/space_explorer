@@ -21,6 +21,9 @@ rover            = SpaceExplorer::Rover.new(world)
 ground_control   = SpaceExplorer::MissionControl.new(
                     Cinch::Channel.new(ENV["ROVER_CHANNEL"], bot))
 
+#FIXME: maybe initialize radio without target and then set later,
+# allowing direct injection into Rover/MissionControl?
+                   
 rover.radio_link           = SpaceExplorer::Radio.new(ground_control)
 ground_control.radio_link  = SpaceExplorer::Radio.new(rover)
 
