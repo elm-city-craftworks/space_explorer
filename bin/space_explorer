@@ -15,9 +15,9 @@ bot.configure do |c|
 end
 
 map_data = File.read("#{data_dir}/map.txt").lines.map { |e| e.split }
-world    = SpaceExplorer::World.new(map_data)
+world    = SpaceExplorer::World.new(map_data, 10, 12)
 
-rover            = SpaceExplorer::Rover.new(world, 10, 12)
+rover            = SpaceExplorer::Rover.new(world)
 ground_control   = SpaceExplorer::MissionControl.new(
                     Cinch::Channel.new(ENV["ROVER_CHANNEL"], bot))
 

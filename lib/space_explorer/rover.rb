@@ -5,10 +5,8 @@ module SpaceExplorer
     attr_writer :radio_link
 
     # TODO: Introduce a position object
-    def initialize(world, row, column)
-      @world  = world
-      @row    = row
-      @column = column
+    def initialize(world)
+      @world = world
 
       @queue = Queue.new
     end
@@ -21,18 +19,10 @@ module SpaceExplorer
       case command
       when "!PING"
         @radio_link.transmit("PONG")
-      when "!NORTH"
-        @row -= 1
-      when "!SOUTH"
-        @row += 1
-      when "!EAST"
-        @column += 1
-      when "!WEST"
-        @column -= 1
+      when "!NORTH", "!SOUTH", "!EAST", "!WEST"      
+        @world.move(command[1..-1])
       when "!SNAPSHOT"
-        @world.snapshot(@row, @column) do |data|
-          transmit_encoded_snapshot(data)
-        end
+        @world.snapshot { |data| transmit_encoded_snapshot(data) }
       else
         # do nothing
       end

@@ -2,17 +2,36 @@
 
 module SpaceExplorer
   class World
-    def initialize(data)
+    DELTAS = (-2..2).to_a.product((-2..2).to_a)
+
+    def initialize(data, row, col)
       @data   = data
-      @deltas = (-2..2).to_a.product((-2..2).to_a)
+
+      @row    = row
+      @col    = col
     end
 
-    def snapshot(row, col)
-      snapshot = @deltas.map do |Δrow, Δcol|
+    def move(direction)
+      case direction
+      when "NORTH"
+        @row -= 1
+      when "SOUTH"
+        @row += 1
+      when "EAST"
+        @col += 1
+      when "WEST"
+        @col -= 1
+      else
+        raise ArgumentError, "Invalid direction!"
+      end
+    end
+
+    def snapshot
+      snapshot = DELTAS.map do |Δrow, Δcol|
         if Δcol == 0 && Δrow == 0
           "@"
         else
-          @data[row + Δrow][col + Δcol]
+          @data[@row + Δrow][@col + Δcol]
         end
       end
 
