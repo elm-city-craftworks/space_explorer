@@ -4,6 +4,8 @@ require "cinch"
 
 require_relative "../lib/space_explorer"
 
+data_dir = "#{File.dirname(__FILE__)}/../data"
+
 bot = Cinch::Bot.new
 
 bot.configure do |c|
@@ -12,7 +14,10 @@ bot.configure do |c|
   c.nick     = "roboseacreature"
 end
 
-rover            = SpaceExplorer::Rover.new
+map_data = File.read("#{data_dir}/map.txt").lines.map { |e| e.split }
+world    = SpaceExplorer::World.new(map_data)
+
+rover            = SpaceExplorer::Rover.new(world, 10, 12)
 ground_control   = SpaceExplorer::MissionControl.new(
                     Cinch::Channel.new(ENV["ROVER_CHANNEL"], bot))
 

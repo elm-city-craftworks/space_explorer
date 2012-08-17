@@ -4,12 +4,13 @@ module SpaceExplorer
   class Rover
     attr_writer :radio_link
 
-    def initialize
-      @queue = Queue.new
-      @world = World.new
+    # TODO: Introduce a position object
+    def initialize(world, row, column)
+      @world  = world
+      @row    = row
+      @column = column
 
-      @column = 11
-      @row    = 7
+      @queue = Queue.new
     end
 
     def receive_command(command)
