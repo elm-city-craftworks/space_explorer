@@ -9,6 +9,8 @@ module SpaceExplorer
       @world = world
 
       @queue = Queue.new
+
+      Thread.new { loop { process_command(@queue.pop) } }
     end
 
     def receive_command(command)
@@ -28,11 +30,11 @@ module SpaceExplorer
       end
     end
 
-    def listen
-      Thread.new { loop { process_command(@queue.pop) } }
-    end
-
     private
+
+    def listen_for_commands
+
+    end
 
     def transmit_encoded_snapshot(data)
       output = data.map { |row| row.join(" ") }.join("\n")

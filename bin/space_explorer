@@ -27,7 +27,6 @@ ground_control   = SpaceExplorer::MissionControl.new(
 rover.radio_link           = SpaceExplorer::Radio.new(ground_control)
 ground_control.radio_link  = SpaceExplorer::Radio.new(rover)
 
-rover.listen
 
 bot.on(:message, /(.*)/) do |m, command|
  ground_control.send_command(command)
