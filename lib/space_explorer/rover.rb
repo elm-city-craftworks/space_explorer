@@ -29,8 +29,6 @@ module SpaceExplorer
     end
 
     def listen
-      @queue ||= Queue.new
-
       Thread.new { loop { process_command(@queue.pop) } }
     end
 
