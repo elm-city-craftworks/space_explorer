@@ -32,10 +32,6 @@ module SpaceExplorer
 
     private
 
-    def listen_for_commands
-
-    end
-
     def transmit_encoded_snapshot(data)
       output = data.map { |row| row.join(" ") }.join("\n")
 
