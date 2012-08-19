@@ -27,11 +27,11 @@ module SpaceExplorer
     end
 
     def snapshot
-      snapshot = DELTAS.map do |Δrow, Δcol|
-        if Δcol == 0 && Δrow == 0
+      snapshot = DELTAS.map do |rowD, colD|
+        if colD == 0 && rowD == 0
           "@"
         else
-          @data[@row + Δrow][@col + Δcol]
+          @data[@row + rowD][@col + colD]
         end
       end
 

@@ -2,11 +2,9 @@ require "thread"
 
 module SpaceExplorer
   class Rover
-    attr_writer :radio_link
-
-    # TODO: Introduce a position object
-    def initialize(world)
-      @world = world
+    def initialize(world, radio_link)
+      @world      = world
+      @radio_link = radio_link
 
       @queue = Queue.new
 

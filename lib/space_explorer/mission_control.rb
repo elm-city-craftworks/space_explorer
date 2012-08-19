@@ -1,10 +1,9 @@
 module SpaceExplorer
   class MissionControl
-    def initialize(narrator)
-      @narrator = narrator
+    def initialize(narrator, radio_link)
+      @narrator   = narrator
+      @radio_link = radio_link
     end
-
-    attr_writer :radio_link
 
     def send_command(command)
       @radio_link.transmit(command)

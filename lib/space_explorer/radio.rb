@@ -2,11 +2,13 @@ module SpaceExplorer
   class Radio
     TRANSMISSION_DELAY = 1#60*14 + 6
 
-    def initialize(target)
+    def establish_connection(target)
       @target = target
     end
 
     def transmit(command)
+      raise "Target not defined" unless defined?(@target)
+
       start_time = Time.now
 
       Thread.new do
