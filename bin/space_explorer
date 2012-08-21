@@ -19,10 +19,12 @@ channel  = Cinch::Channel.new(ENV["ROVER_CHANNEL"], bot)
 map_data = File.read("#{data_dir}/map.txt").lines.map { |e| e.split }
 world    = SpaceExplorer::World.new(map_data, 10, 12)
 
-rover_radio   = SpaceExplorer::Radio.new
+delay    = 2
+
+rover_radio   = SpaceExplorer::Radio.new(delay)
 rover         = SpaceExplorer::Rover.new(world, rover_radio)
 
-ground_control_radio  = SpaceExplorer::Radio.new
+ground_control_radio  = SpaceExplorer::Radio.new(delay)
 ground_control        = SpaceExplorer::MissionControl.new(channel, ground_control_radio)
 
 rover_radio.establish_connection(ground_control)
