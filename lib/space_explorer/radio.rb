@@ -11,9 +11,9 @@ module SpaceExplorer
     def transmit(command)
       raise "Target not defined" unless defined?(@target)
 
-      start_time = Time.now
-
       Thread.new do
+        start_time = Time.now
+
         sleep 1 while Time.now - start_time < @delay
 
         @target.receive_command(command) 

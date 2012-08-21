@@ -33,7 +33,9 @@ module SpaceExplorer
         end
       end
 
-      yield snapshot.each_slice(5).to_a
+      text = snapshot.each_slice(5).map { |e| e.join(" ") }.join("\n")
+
+      yield text
     end
   end
 end

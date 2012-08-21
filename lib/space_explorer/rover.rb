@@ -22,18 +22,10 @@ module SpaceExplorer
       when "!NORTH", "!SOUTH", "!EAST", "!WEST"      
         @world.move(command[1..-1])
       when "!SNAPSHOT"
-        @world.snapshot { |data| transmit_encoded_snapshot(data) }
+        @world.snapshot { |text| @radio_link.transmit("\n#{text}") }
       else
         # do nothing
       end
-    end
-
-    private
-
-    def transmit_encoded_snapshot(data)
-      output = data.map { |row| row.join(" ") }.join("\n")
-
-      @radio_link.transmit("\n#{output}")
     end
   end
 end
