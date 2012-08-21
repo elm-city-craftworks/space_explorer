@@ -1,5 +1,3 @@
-# coding: UTF-8
-
 module SpaceExplorer
   class World
     DELTAS = (-2..2).to_a.product((-2..2).to_a)
