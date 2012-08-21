@@ -14,7 +14,7 @@ module SpaceExplorer
       start_time = Time.now
 
       Thread.new do
-        sleep 1 while Time.now - start_time < delay
+        sleep 1 while Time.now - start_time < @delay
 
         @target.receive_command(command) 
       end

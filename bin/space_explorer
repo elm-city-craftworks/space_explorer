@@ -10,11 +10,17 @@ bot = Cinch::Bot.new
 
 bot.configure do |c|
   c.server = "irc.freenode.org"
-  c.channels = ["#{ENV['ROVER_CHANNEL']} #{ENV['ROVER_PASSWORD']}"]
-  c.nick     = "roboseacreature"
+
+  if ENV['ROVER_PASSWORD']
+    c.channels = ["#{ENV['ROVER_CHANNEL']} #{ENV['ROVER_PASSWORD']}"]
+  else
+    c.channels = [ENV['ROVER_CHANNEL']]
+  end
+
+  c.nick = ENV['ROVER_NAME']
 end
 
-channel  = Cinch::Channel.new(ENV["ROVER_CHANNEL"], bot)
+channel  = Cinch::Channel.new(ENV['ROVER_CHANNEL'], bot)
 
 map_data = File.read("#{data_dir}/map.txt").lines.map { |e| e.split }
 world    = SpaceExplorer::World.new(map_data, 10, 12)
