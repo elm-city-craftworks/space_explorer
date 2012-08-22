@@ -17,11 +17,11 @@ module SpaceExplorer
 
     def process_command(command)
       case command
-      when "!PING"
+      when "PING"
         @radio_link.transmit("PONG")
-      when "!NORTH", "!SOUTH", "!EAST", "!WEST"      
-        @world.move(command[1..-1])
-      when "!SNAPSHOT"
+      when "NORTH", "SOUTH", "EAST", "WEST"      
+        @world.move(command)
+      when "SNAPSHOT"
         @world.snapshot { |text| @radio_link.transmit("\n#{text}") }
       else
         # do nothing
