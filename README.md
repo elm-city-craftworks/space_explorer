@@ -10,7 +10,7 @@ following:
 ROVER_CHANNEL="#somechannel" ROVER_NAME="somenick" ruby bin/space_explorer
 ```
 
-If the room you are trying to connect to has a password, do this instead:
+If the room you are trying to connect to requires a password, do this instead:
 
 ```bash
 $ ROVER_CHANNEL="#somechannel" ROVER_NAME="somenick" ROVER_PASSWORD="somepassword" ruby bin/space_explorer
