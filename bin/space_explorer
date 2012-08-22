@@ -30,14 +30,14 @@ delay    = 2
 rover_radio   = SpaceExplorer::Radio.new(delay)
 rover         = SpaceExplorer::Rover.new(world, rover_radio)
 
-ground_control_radio  = SpaceExplorer::Radio.new(delay)
-ground_control        = SpaceExplorer::MissionControl.new(channel, ground_control_radio)
+mission_control_radio  = SpaceExplorer::Radio.new(delay)
+mission_control        = SpaceExplorer::MissionControl.new(channel, mission_control_radio)
 
-rover_radio.establish_connection(ground_control)
-ground_control_radio.establish_connection(rover)
+rover_radio.establish_connection(mission_control)
+mission_control_radio.establish_connection(rover)
 
 bot.on(:message, /\A!(.*)/) do |m, command|
- ground_control.send_command(command)
+ mission_control.send_command(command)
 end
 
 bot.start
